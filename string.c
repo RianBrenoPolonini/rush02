@@ -6,7 +6,7 @@
 /*   By: rfaria-p <rfaria-p@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/30 12:02:33 by rfaria-p          #+#    #+#             */
-/*   Updated: 2024/06/30 12:20:22 by rfaria-p         ###   ########.fr       */
+/*   Updated: 2024/06/30 13:23:02 by rfaria-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ char	*ft_strcpy(char *dest, const char *src)
 	int	i;
 
 	i = 0;
-	while (src[i] != '\0')
+	while (src[i])
 	{
 		dest[i] = src[i];
 		i++;
@@ -58,9 +58,9 @@ char	*concat_strings(const char *str1, const char *str2)
 {
 	char	*result;
 
-	result = malloc(ft_str_len(str1) + ft_str_len(str2) + 1);
+	result = (char *)malloc(ft_str_len(str1) + ft_str_len(str2) + 1);
 	if (!result)
-		exit(EXIT_FAILURE);
+		return (NULL);
 	ft_strcpy(result, str1);
 	ft_strcat(result, str2);
 	return (result);
@@ -72,9 +72,9 @@ char	*ft_strdup(const char *str)
 	char	*dup;
 
 	len = ft_str_len(str);
-	dup = malloc(len + 1);
+	dup = (char *)malloc(len + 1);
 	if (!dup)
-		exit(EXIT_FAILURE);
+		return (NULL);
 	ft_strcpy(dup, str);
 	return (dup);
 }
