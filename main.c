@@ -6,96 +6,11 @@
 /*   By: rfaria-p <rfaria-p@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/29 16:37:50 by rfaria-p          #+#    #+#             */
-/*   Updated: 2024/06/30 11:25:58 by rfaria-p         ###   ########.fr       */
+/*   Updated: 2024/06/30 12:30:04 by rfaria-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <fcntl.h>
-
-int ft_str_len(const char *str)
-{
-    int i = 0;
-    while (str[i])
-        i++;
-    return (i);
-}
-
-char *ft_strcpy(char *dest, const char *src)
-{
-    int i = 0;
-    while (src[i] != '\0')
-    {
-        dest[i] = src[i];
-        i++;
-    }
-    dest[i] = '\0';
-    return (dest);
-}
-
-char *ft_strcat(char *dest, const char *src)
-{
-    int i = 0;
-    int j = 0;
-    
-    i = ft_str_len(dest);
-    while (src[j])
-    {
-        dest[i] = src[j];
-        i++;
-        j++;
-    }
-    dest[i] = '\0';
-    return (dest);
-}
-
-char *concat_strings(const char *str1, const char *str2)
-{
-    char *result;
-    
-    result = malloc(ft_str_len(str1) + ft_str_len(str2) + 1);
-    if (!result)
-        exit(EXIT_FAILURE);
-    ft_strcpy(result, str1);
-    ft_strcat(result, str2);
-    return (result);
-}
-
-char *ft_strdup(const char *str) {
-    int len;
-    char *dup;
-
-    len = ft_str_len(str);
-    dup = malloc(len + 1);
-    if (!dup) 
-        exit(EXIT_FAILURE);
-    ft_strcpy(dup, str);
-    return (dup);
-}
-
-long long int ft_atoll(const char *str) {
-    long long int result = 0;
-    int sign = 1;
-    int i = 0;
-
-    while (str[i] == ' ')
-        i++;
-    if (str[i] == '-')
-	{
-        sign = -1;
-		i++;
-	}
-	else if (str[i] == '+')
-    	i++;
-    while (str[i] >= '0' && str[i] <= '9') {
-        result = result * 10 + (str[i] - '0');
-        i++;
-    }
-
-    return (result * sign);
-}
+#include "header.h"
 
 char *number_to_words(long long num) {
     char *num_dict[] = {
@@ -215,7 +130,6 @@ int main()
 
     words = number_to_words(num);
 
-    // Usando a função write para imprimir o resultado
     int fd = open("/dev/stdout", O_WRONLY);
     write(fd, words, ft_str_len(words));
     write(fd, "\n", 1);
@@ -223,5 +137,5 @@ int main()
 
     free(words);
 
-    return 0;
+    return (0);
 }
