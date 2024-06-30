@@ -6,7 +6,7 @@
 /*   By: rfaria-p <rfaria-p@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/29 16:37:50 by rfaria-p          #+#    #+#             */
-/*   Updated: 2024/06/30 13:39:23 by rfaria-p         ###   ########.fr       */
+/*   Updated: 2024/06/30 14:55:30 by rfaria-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -175,22 +175,39 @@ char *number_to_words(long long num) {
     return (result);
 }
 
-int	main()
+void	process_input(char *input)
 {
 	long long	num;
 	char		*words;
-	char		buffer[1024];
 
-	printf("Digite um número para convertê-lo em texto:\n");
-	read(STDIN_FILENO, buffer, sizeof(buffer));
-	num = ft_atoll(buffer);
+	num = ft_atoll(input);
+	if (num < 0)
+	{
+		write(1, "Error\n", 6);
+		return ;
+	}
 	words = number_to_words(num);
-	if (!words)
+	if (words)
+	{
+		write(1, words, ft_str_len(words));
+		write(1, "\n", 1);
+		free(words);
+	}
+}
+
+int	main(int argc, char **argv)
+{
+	char	buffer[1024];
+
+	if (argc > 3)
 		return (0);
-	int fd = open("/dev/stdout", O_WRONLY);
-	write(fd, words, ft_str_len(words));
-	write(fd, "\n", 1);
-	close(fd);
-	free(words);
+	if (argc == 1)
+	{
+		read(STDIN_FILENO, buffer, sizeof(buffer));
+		buffer[sizeof(buffer) - 1] = '\0';
+		process_input(buffer);
+	}
+	else
+		process_input(argv[argc - 1]);
 	return (0);
 }

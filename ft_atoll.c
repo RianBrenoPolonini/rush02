@@ -6,7 +6,7 @@
 /*   By: rfaria-p <rfaria-p@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/30 12:14:52 by rfaria-p          #+#    #+#             */
-/*   Updated: 2024/06/30 12:20:34 by rfaria-p         ###   ########.fr       */
+/*   Updated: 2024/06/30 14:43:56 by rfaria-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ long long int	ft_atoll(const char *str)
 	result = 0;
 	sign = 1;
 	i = 0;
-	while (str[i] == ' ')
+	while (str[i] == ' ' || str[i] == '\t' || str[i] == '\n'
+		|| str[i] == '\v' || str[i] == '\f' || str[i] == '\r')
 		i++;
 	if (str[i] == '-')
 	{
